@@ -50,9 +50,9 @@ public final class ServletUtil
 
 	private static final Pattern ABSOLUTE_URL_PATTERN = Pattern.compile("\\A[a-z0-9.+-]+://.*", Pattern.CASE_INSENSITIVE);
 
-	private ServletUtil()
+	private ServletUtil() throws IllegalAccessException
 	{
-		throw new IllegalStateException(getClass().getName() + CommonConstants.CANNOT_BE_INSTANTIATED);
+		throw new IllegalAccessException(getClass().getName() + CommonConstants.CANNOT_BE_INSTANTIATED);
 	}
 
 	public static boolean isAbsoluteUrl(final String url)
