@@ -1,3 +1,34 @@
+/**
+ * This project is licensed under the Apache License, Version 2.0
+ * if the following condition is met:
+ * (otherwise it cannot be used by anyone but the author, Kevin, only)
+ *
+ * The original KommonLee project is owned by Lee, Seong Hyun (Kevin).
+ *
+ * -What does it mean to you?
+ * Nothing, unless you want to take the ownership of
+ * "the original project" (not yours or forked & modified one).
+ * You are free to use it for both non-commercial and commercial projects
+ * and free to modify it as the Apache License allows.
+ *
+ * -So why is this condition necessary?
+ * It is only to protect the original project (See the case of Java).
+ *
+ *
+ * Copyright 2009 Lee, Seong Hyun (Kevin)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.elixirian.kommonlee.web.servlet;
 
 import static org.elixirian.kommonlee.web.CommonWebConstants.*;
@@ -19,12 +50,12 @@ import org.elixirian.kommonlee.web.CommonWebConstants;
 /**
  * <pre>
  *     ___  _____                                              _____
- *    /   \/    / ______ __________________  ______ __ ______ /    /   ______  ______  
- *   /        / _/ __  // /  /   / /  /   /_/ __  // //     //    /   /  ___ \/  ___ \ 
+ *    /   \/    / ______ __________________  ______ __ ______ /    /   ______  ______
+ *   /        / _/ __  // /  /   / /  /   /_/ __  // //     //    /   /  ___ \/  ___ \
  *  /        \ /  /_/ _/  _  _  /  _  _  //  /_/ _/   __   //    /___/  _____/  _____/
  * /____/\____\/_____//__//_//_/__//_//_/ /_____//___/ /__//________/\_____/ \_____/
  * </pre>
- * 
+ *
  * <pre>
  *     ___  _____                                _____
  *    /   \/    /_________  ___ ____ __ ______  /    /   ______  ______
@@ -32,7 +63,7 @@ import org.elixirian.kommonlee.web.CommonWebConstants;
  *  /        \ /  _____/\    //   //   __   / /    /___/  _____/  _____/
  * /____/\____\\_____/   \__//___//___/ /__/ /________/\_____/ \_____/
  * </pre>
- * 
+ *
  * @author Lee, SeongHyun (Kevin)
  * @version 0.0.1 (2010-04-19)
  */
@@ -69,7 +100,7 @@ public final class ServletUtil
 	/**
 	 * Returns the value of the named attribute in the given HttpServletRequest, or null if no attribute of the given name
 	 * exists. It casts the object to the generic type <code><T></code>.
-	 * 
+	 *
 	 * @param <T>
 	 *          type to cast
 	 * @param request
@@ -100,7 +131,7 @@ public final class ServletUtil
 	 * If the parameter data was sent in the request body, such as occurs with an HTTP POST request, then reading the body
 	 * directly via {@link ServletRequest#getInputStream()} or {@link ServletRequest#getReader()} can interfere with the
 	 * execution of this method.
-	 * 
+	 *
 	 * @param request
 	 *          {@link HttpServletRequest}
 	 * @param parameterName
@@ -118,7 +149,7 @@ public final class ServletUtil
 	 * <code>null</code> if the parameter does not exist.
 	 * <p>
 	 * If the parameter has a single value, the array has a length of 1.
-	 * 
+	 *
 	 * @param request
 	 *          {@link HttpServletRequest}
 	 * @param parametersName
@@ -141,7 +172,7 @@ public final class ServletUtil
 	 * <code>RequestDispatcher</code>, the object set by this method may not be correctly retrieved in the caller servlet.
 	 * </p>
 	 * After storing the given attribute object, it returns the object.
-	 * 
+	 *
 	 * @param <T>
 	 *          the type of attribute object
 	 * @param request
@@ -187,7 +218,7 @@ public final class ServletUtil
 	// final String attribute)
 	// {
 	// // TODO: remove dependency: HtmlUtils
-	// final String escapedString = HtmlUtils.htmlEscape(attribute);
+	// final String escapedString = HtmlUtils.escapeHtml(attribute);
 	// request.setAttribute(attributeName, escapedString);
 	// return escapedString;
 	// }
@@ -200,7 +231,7 @@ public final class ServletUtil
 	/**
 	 * Returns forward request URI. It is the same as
 	 * <code>request.getAttribute("javax.servlet.forward.request_uri")</code>
-	 * 
+	 *
 	 * @param request
 	 *          the given {@link HttpServletRequest}
 	 * @return The forward request URI. null if not forward request URI is found.
@@ -280,7 +311,7 @@ public final class ServletUtil
 	/**
 	 * Same as <code>request.getSession()</code>. So it returns the current session associated with this request, or if
 	 * the request does not have a session, creates one.
-	 * 
+	 *
 	 * @param request
 	 * @return returns the result of <code>request.getSession()</code>.
 	 */
@@ -292,7 +323,7 @@ public final class ServletUtil
 	/**
 	 * Same as <code>request.getSession(false)</code>. So it returns the current {@link HttpSession} associated with this
 	 * request or, if there is no current session, returns <code>null</code>.
-	 * 
+	 *
 	 * @param request
 	 *          the given {@link HttpServletRequest}
 	 * @return returns the result of <code>request.getSession(false)</code>.
@@ -305,7 +336,7 @@ public final class ServletUtil
 	/**
 	 * Returns the object bound with the specified name in the given session, or null if no object is bound under the
 	 * name. It casts the object to the generic type T.
-	 * 
+	 *
 	 * @param <T>
 	 *          type to cast
 	 * @param session
@@ -340,7 +371,7 @@ public final class ServletUtil
 	 * After binding it returns the binded attribute object. If the object is String, it is escaped by
 	 * {@link StringEscapeUtil#escapeHtml(String)} before binding.
 	 * </p>
-	 * 
+	 *
 	 * @param <T>
 	 *          the type of the given attribute object.
 	 * @param session
@@ -396,7 +427,7 @@ public final class ServletUtil
 	// setEscapedAttribute(final HttpSession session, final String attributeName, final String attribute)
 	// {
 	// // TODO: remove dependency: HtmlUtils
-	// final String escapedString = HtmlUtils.htmlEscape(attribute);
+	// final String escapedString = HtmlUtils.escapeHtml(attribute);
 	// session.setAttribute(attributeName, escapedString);
 	// return escapedString;
 	// }
@@ -448,7 +479,7 @@ public final class ServletUtil
 
 	/**
 	 * Check if the request is sent by XMLHttpRequest object by checking the header with the name "X-Requested-With".
-	 * 
+	 *
 	 * @param request
 	 * @return true if the header has the value of "X-Requested-With" and it is "XMLHttpRequest". false if the value is
 	 *         not equal to "XMLHttpRequest" or the header value doesn't exist at all.
@@ -461,7 +492,7 @@ public final class ServletUtil
 	/**
 	 * Check if the given header value is equal to {@link #HEADER_XML_HTTP_REQUEST_VALUE} that is "XMLHttpRequest" to
 	 * check if it is sent by XMLHttpRequest object.
-	 * 
+	 *
 	 * @param headerValue
 	 * @return true if the headerValue is equal to "XMLHttpRequest". false if the value is not equal to "XMLHttpRequest".
 	 *         false otherwise..
@@ -473,7 +504,7 @@ public final class ServletUtil
 
 	/**
 	 * Exactly same as {@link ServletUtil#isXmlHttpRequest(HttpServletRequest)}
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
