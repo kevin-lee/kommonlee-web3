@@ -35,7 +35,7 @@ import static org.elixirian.kommonlee.util.Strings.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.elixirian.kommonlee.type.function.Function1;
+import org.elixirian.kommonlee.type.functional.Function1;
 
 /**
  * <pre>
