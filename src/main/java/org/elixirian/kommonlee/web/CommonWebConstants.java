@@ -80,7 +80,7 @@ public final class CommonWebConstants
    */
   public static final String HEADER_FOR_XML_HTTP_REQUEST_NAME = "X-Requested-With";
 
-  public final String HEADER_NAME_X_FORWARDED_PROTO = "X-Forwarded-Proto";
+  public static final String HEADER_NAME_X_FORWARDED_PROTO = "X-Forwarded-Proto";
 
   public static final String HTTP = "http";
 
