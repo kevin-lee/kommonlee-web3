@@ -55,52 +55,58 @@ import org.elixirian.kommonlee.util.CommonConstants;
  */
 public final class CommonWebConstants
 {
-	/**
-	 * "javax.servlet.forward.request_uri"
-	 */
-	public static final String JAVAX_SERVLET_FORWARD_REQUEST_URI = "javax.servlet.forward.request_uri";
+  /**
+   * "javax.servlet.forward.request_uri"
+   */
+  public static final String JAVAX_SERVLET_FORWARD_REQUEST_URI = "javax.servlet.forward.request_uri";
 
-	/**
-	 * "javax.servlet.error.exception"
-	 */
-	public static final String JAVAX_SERVLET_ERROR_EXCEPTION = "javax.servlet.error.exception";
+  /**
+   * "javax.servlet.error.exception"
+   */
+  public static final String JAVAX_SERVLET_ERROR_EXCEPTION = "javax.servlet.error.exception";
 
-	/**
-	 * "Referer"
-	 */
-	public static final String HEADER_REFERRER_NAME = "Referer";
+  /**
+   * "Referer"
+   */
+  public static final String HEADER_REFERRER_NAME = "Referer";
 
-	/**
-	 * "user-agent"
-	 */
-	public static final String HEADER_USER_AGENT_NAME = "user-agent";
+  /**
+   * "user-agent"
+   */
+  public static final String HEADER_USER_AGENT_NAME = "user-agent";
 
-	/**
-	 * "X-Requested-With"
-	 */
-	public static final String HEADER_FOR_XML_HTTP_REQUEST_NAME = "X-Requested-With";
+  /**
+   * "X-Requested-With"
+   */
+  public static final String HEADER_FOR_XML_HTTP_REQUEST_NAME = "X-Requested-With";
 
-	/**
-	 * "XMLHttpRequest"
-	 */
-	public static final String HEADER_XML_HTTP_REQUEST_VALUE = "XMLHttpRequest";
+  public final String HEADER_NAME_X_FORWARDED_PROTO = "X-Forwarded-Proto";
 
-	public static final String HEADER_CONTENT_TYPE_TEXT = "text";
-	public static final String HEADER_CONTENT_TYPE_TEXT_HTML = "text/html";
-	public static final String HEADER_CONTENT_TYPE_APPLICATION_JSON = "application/json";
+  public static final String HTTP = "http";
 
-	public static final int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-	public static final int THIRTY_DAYS_IN_SECONDS = ONE_DAY_IN_SECONDS * 30;
-	public static final int ONE_YEAR_IN_SECONDS = ONE_DAY_IN_SECONDS * 365;
+  public static final String HTTPS = "https";
 
-	public static final String CACHE_CONTROL = "Cache-Control";
-	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
-	public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE = "max-age=" + ONE_YEAR_IN_SECONDS + ", public";
-	public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE_BUT_MUST_REVALIDATE =
-		CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE + ", must-revalidate";
+  /**
+   * "XMLHttpRequest"
+   */
+  public static final String HEADER_XML_HTTP_REQUEST_VALUE = "XMLHttpRequest";
 
-	private CommonWebConstants() throws IllegalAccessException
-	{
-		throw new IllegalAccessException(getClass().getName() + CommonConstants.CANNOT_BE_INSTANTIATED);
-	}
+  public static final String HEADER_CONTENT_TYPE_TEXT = "text";
+  public static final String HEADER_CONTENT_TYPE_TEXT_HTML = "text/html";
+  public static final String HEADER_CONTENT_TYPE_APPLICATION_JSON = "application/json";
+
+  public static final int ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+  public static final int THIRTY_DAYS_IN_SECONDS = ONE_DAY_IN_SECONDS * 30;
+  public static final int ONE_YEAR_IN_SECONDS = ONE_DAY_IN_SECONDS * 365;
+
+  public static final String CACHE_CONTROL = "Cache-Control";
+  public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
+  public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE = "max-age=" + ONE_YEAR_IN_SECONDS + ", public";
+  public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE_BUT_MUST_REVALIDATE =
+    CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE + ", must-revalidate";
+
+  private CommonWebConstants() throws IllegalAccessException
+  {
+    throw new IllegalAccessException(getClass().getName() + CommonConstants.CANNOT_BE_INSTANTIATED);
+  }
 }
