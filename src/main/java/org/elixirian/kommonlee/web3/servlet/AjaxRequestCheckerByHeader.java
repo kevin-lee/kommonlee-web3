@@ -29,7 +29,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.elixirian.kommonlee.web.servlet;
+package org.elixirian.kommonlee.web3.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 

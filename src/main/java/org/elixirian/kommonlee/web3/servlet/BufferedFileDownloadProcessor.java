@@ -29,15 +29,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.elixirian.kommonlee.web.servlet;
+package org.elixirian.kommonlee.web3.servlet;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.elixirian.kommonlee.io.exception.RuntimeIoException;
+import org.elixirian.kommonlee.type.Source;
 
 /**
  * <pre>
  *     ___  _____                                              _____
- *    /   \/    / ______ __________________  ______ __ ______ /    /   ______  ______  
- *   /        / _/ __  // /  /   / /  /   /_/ __  // //     //    /   /  ___ \/  ___ \ 
+ *    /   \/    / ______ __________________  ______ __ ______ /    /   ______  ______
+ *   /        / _/ __  // /  /   / /  /   /_/ __  // //     //    /   /  ___ \/  ___ \
  *  /        \ /  /_/ _/  _  _  /  _  _  //  /_/ _/   __   //    /___/  _____/  _____/
  * /____/\____\/_____//__//_//_/__//_//_/ /_____//___/ /__//________/\_____/ \_____/
  * </pre>
@@ -51,9 +56,16 @@ import javax.servlet.http.HttpServletRequest;
  * </pre>
  * 
  * @author Lee, SeongHyun (Kevin)
- * @version 0.0.1 (2012-04-01)
+ * @version 0.0.1 (2010-03-18)
  */
-public interface AjaxRequestChecker
+public interface BufferedFileDownloadProcessor<T extends InputStream> extends FileDownloadProcessor<T>
 {
-	boolean isAjax(final HttpServletRequest request);
+  int getBufferSize();
+
+  @Override
+  public void processDownload(HttpServletResponse response, String fileName, Source<T> source)
+      throws RuntimeIoException;
+
+  void processDownload(HttpServletResponse response, String fileName, Source<T> source, int bufferSize)
+      throws RuntimeIoException;
 }
