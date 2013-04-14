@@ -100,15 +100,5 @@
       <artifactId>kommonlee-core</artifactId>
       <version>0.0.30-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>org.elixirian</groupId>
-      <artifactId>kommonlee-exception</artifactId>
-      <version>0.0.19-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.elixirian</groupId>
-      <artifactId>kommonlee-io</artifactId>
-      <version>0.0.22-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 </project>
