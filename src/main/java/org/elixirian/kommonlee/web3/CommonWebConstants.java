@@ -100,7 +100,10 @@ public final class CommonWebConstants
   public static final int ONE_YEAR_IN_SECONDS = ONE_DAY_IN_SECONDS * 365;
 
   public static final String CACHE_CONTROL = "Cache-Control";
-  public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
+  public static final String NO_CACHE = "no-cache";
+  public static final String NO_CACHE_NO_STORE_MAX_AGE_0_MUST_REVALIDATE =
+    "no-cache, no-store, max-age=0, must-revalidate";
+
   public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE = "max-age=" + ONE_YEAR_IN_SECONDS + ", public";
   public static final String CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE_BUT_MUST_REVALIDATE =
     CACHE_CONTROL_AGGRESSIVE_CACHE_VALUE + ", must-revalidate";

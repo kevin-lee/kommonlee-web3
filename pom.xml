@@ -110,8 +110,8 @@
     <dependency>
       <groupId>org.elixirian</groupId>
       <artifactId>kommonlee-core</artifactId>
-      <version>0.0.32-SNAPSHOT</version>
+      <version>0.0.33-SNAPSHOT</version>
     </dependency>
   </dependencies>
-  <version>0.0.15-SNAPSHOT</version>
+  <version>0.0.16-SNAPSHOT</version>
 </project>
