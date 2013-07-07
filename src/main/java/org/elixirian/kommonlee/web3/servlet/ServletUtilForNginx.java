@@ -39,6 +39,7 @@ import java.net.UnknownHostException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.elixirian.kommonlee.util.CommonConstants;
+import org.elixirian.kommonlee.web3.CommonWebConstants;
 
 /**
  * <pre>
@@ -84,6 +85,10 @@ public class ServletUtilForNginx
     {
       return host;
     }
+    /*
+     * request.getRemoteHost() would return a remote IP address instead of the hostname so get the hostname using
+     * InetAddress.
+     */
     final String remoteAddr = getRemoteAddr(request);
     try
     {
@@ -106,5 +111,10 @@ public class ServletUtilForNginx
   {
     final String protocol = request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
     return null == protocol ? request.getProtocol() : protocol;
+  }
+
+  public static boolean isSecure(final HttpServletRequest request)
+  {
+    return request.isSecure() || CommonWebConstants.HTTPS.equals(ServletUtilForNginx.getProtocol(request));
   }
 }

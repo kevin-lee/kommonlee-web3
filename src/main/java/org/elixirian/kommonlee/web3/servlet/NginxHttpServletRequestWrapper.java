@@ -42,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  *  /        \ /  /_/ _/  _  _  /  _  _  //  /_/ _/   __   //    /___/  _____/  _____/
  * /____/\____\/_____//__//_//_/__//_//_/ /_____//___/ /__//________/\_____/ \_____/
  * </pre>
- *
+ * 
  * <pre>
  *     ___  _____                                _____
  *    /   \/    /_________  ___ ____ __ ______  /    /   ______  ______
@@ -50,7 +50,7 @@ import javax.servlet.http.HttpServletRequest;
  *  /        \ /  _____/\    //   //   __   / /    /___/  _____/  _____/
  * /____/\____\\_____/   \__//___//___/ /__/ /________/\_____/ \_____/
  * </pre>
- *
+ * 
  * @author Lee, SeongHyun (Kevin)
  * @version 0.0.1 (2013-02-10)
  */
@@ -76,6 +76,17 @@ public class NginxHttpServletRequestWrapper extends HttpServletRequestWrapper
   public String getRemoteHost()
   {
     return ServletUtilForNginx.getRemoteHost(request);
+  }
+
+  /**
+   * Returns true if the isSecure() method in the {@link HttpServletRequest} object this wrapper contains returns true.
+   * Otherwise, it checks the header value for the name, "X-Forwarded-Proto" then if it's https, it returns true. If
+   * not, false.
+   */
+  @Override
+  public boolean isSecure()
+  {
+    return ServletUtilForNginx.isSecure(request);
   }
 
   public static ServletRequest newInstanceIfHttpServletRequest(final ServletRequest request)
