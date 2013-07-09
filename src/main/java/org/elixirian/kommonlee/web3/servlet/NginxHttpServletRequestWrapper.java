@@ -34,6 +34,8 @@ package org.elixirian.kommonlee.web3.servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.elixirian.kommonlee.web3.CommonWebConstants;
+
 /**
  * <pre>
  *     ___  _____                                              _____
@@ -65,6 +67,43 @@ public class NginxHttpServletRequestWrapper extends HttpServletRequestWrapper
   public String getScheme()
   {
     return ServletUtilForNginx.getScheme(request);
+  }
+
+  @Override
+  public StringBuffer getRequestURL()
+  {
+    final boolean isXForwardedProtocolHttps =
+      CommonWebConstants.HTTPS.equals(ServletUtilForNginx.getXForwardedProtocol(request));
+
+    if (!isXForwardedProtocolHttps)
+    {
+      return request.getRequestURL();
+    }
+
+    final StringBuffer url = new StringBuffer();
+    final String scheme = getScheme();
+    int port = getServerPort();
+    if (port < 0)
+    {
+      port = 80; // Work around java.net.URL bug
+    }
+
+    url.append(scheme)
+        .append("://")
+        .append(getServerName());
+
+    /* @formatter:off */
+    if ((scheme.equals("http") && port != 80) ||
+        (scheme.equals("https") && (port != 443 && port != 80)))
+    {
+      url.append(':')
+         .append(port);
+    }
+    url.append(
+               getRequestURI());
+    /* @formatter:on */
+
+    return url;
   }
 
   @Override

@@ -226,6 +226,518 @@ public class NginxHttpServletRequestWrapperTest
   }
 
   @Test
+  public final void testGetRequestURL()
+  {
+    /* given */
+    final String expected = "https://localhost/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 80;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(2)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL2()
+  {
+    /* given */
+    final String expected = "https://localhost/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 443;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(2)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL3()
+  {
+    /* given */
+    final String expected = "https://localhost:8443/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 8443;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(2)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL4()
+  {
+    /* given */
+    final String expected = "https://localhost:8443/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 8443;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL5()
+  {
+    /* given */
+    final String expected = "https://localhost:8443/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 8443;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL6()
+  {
+    /* given */
+    final String expected = "https://localhost:8443/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "https";
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 8443;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getScheme();
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getServerPort();
+    verify(request, times(1)).getServerName();
+    verify(request, times(1)).getRequestURI();
+    verify(request, never()).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL7()
+  {
+    /* given */
+    final String expected = "http://localhost/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return null;
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 80;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    when(request.getRequestURL()).then(new Answer<StringBuffer>() {
+      @Override
+      public StringBuffer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return new StringBuffer("http://localhost/test/blah");
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, never()).getScheme();
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, never()).getServerPort();
+    verify(request, never()).getServerName();
+    verify(request, never()).getRequestURI();
+    verify(request, times(1)).getRequestURL();
+  }
+
+  @Test
+  public final void testGetRequestURL8()
+  {
+    /* given */
+    final String expected = "http://localhost:8080/test/blah";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return null;
+      }
+    });
+
+    when(request.getServerPort()).then(new Answer<Integer>() {
+      @Override
+      public Integer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return 8080;
+      }
+    });
+
+    when(request.getServerName()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "localhost";
+      }
+    });
+
+    when(request.getRequestURI()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "/test/blah";
+      }
+    });
+
+    when(request.getRequestURL()).then(new Answer<StringBuffer>() {
+      @Override
+      public StringBuffer answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return new StringBuffer("http://localhost:8080/test/blah");
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getRequestURL()
+        .toString();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, never()).getScheme();
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, never()).getServerPort();
+    verify(request, never()).getServerName();
+    verify(request, never()).getRequestURI();
+    verify(request, times(1)).getRequestURL();
+  }
+
+  @Test
   public final void testGetRemoteAddr()
   {
     /* given */
