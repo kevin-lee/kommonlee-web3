@@ -94,6 +94,138 @@ public class NginxHttpServletRequestWrapperTest
   }
 
   @Test
+  public void testGetScheme()
+  {
+    /* given */
+    final String expected = "http";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return expected;
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return null;
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getScheme();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getScheme();
+  }
+
+  @Test
+  public void testGetScheme2()
+  {
+    /* given */
+    final String expected = "https";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return expected;
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getScheme();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, never()).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getScheme();
+  }
+
+  @Test
+  public void testGetSchemeWithHeader()
+  {
+    /* given */
+    final String expected = "https";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return "http";
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return expected;
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getScheme();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, times(1)).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getScheme();
+  }
+
+  @Test
+  public void testGetSchemeWithHeader2()
+  {
+    /* given */
+    final String expected = "https";
+
+    final HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getScheme()).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return expected;
+      }
+    });
+
+    when(request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL)).then(new Answer<String>() {
+      @Override
+      public String answer(@SuppressWarnings("unused") final InvocationOnMock invocation) throws Throwable
+      {
+        return expected;
+      }
+    });
+
+    /* when */
+    final NginxHttpServletRequestWrapper requestWrapper = new NginxHttpServletRequestWrapper(request);
+    final String actual = requestWrapper.getScheme();
+
+    /* then */
+    assertThat(actual, is(equalTo(expected)));
+    verify(request, never()).getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
+    verify(request, times(1)).getScheme();
+  }
+
+  @Test
   public final void testGetRemoteAddr()
   {
     /* given */

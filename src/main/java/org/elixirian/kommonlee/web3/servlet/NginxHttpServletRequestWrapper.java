@@ -62,6 +62,12 @@ public class NginxHttpServletRequestWrapper extends HttpServletRequestWrapper
   }
 
   @Override
+  public String getScheme()
+  {
+    return ServletUtilForNginx.getScheme(request);
+  }
+
+  @Override
   public String getRemoteAddr()
   {
     return getRemoteAddr0();

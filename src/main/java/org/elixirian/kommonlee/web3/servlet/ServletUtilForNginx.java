@@ -68,6 +68,17 @@ public class ServletUtilForNginx
     throw new IllegalAccessException(getClass().getName() + CommonConstants.CANNOT_BE_INSTANTIATED);
   }
 
+  public static String getScheme(final HttpServletRequest request)
+  {
+    final String scheme = request.getScheme();
+    if (CommonWebConstants.HTTP.equals(scheme)
+        && CommonWebConstants.HTTPS.equals(ServletUtilForNginx.getXForwardedProtocol(request)))
+    {
+      return CommonWebConstants.HTTPS;
+    }
+    return scheme;
+  }
+
   public static String getRemoteAddr(final HttpServletRequest request)
   {
     final String realIp = request.getHeader(HEADER_NAME_X_REAL_IP);
@@ -107,14 +118,13 @@ public class ServletUtilForNginx
     return null == forwardFor ? ServletUtil.getForwardRequestUri(request) : forwardFor;
   }
 
-  public static String getProtocol(final HttpServletRequest request)
+  public static String getXForwardedProtocol(final HttpServletRequest request)
   {
-    final String protocol = request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
-    return null == protocol ? request.getProtocol() : protocol;
+    return request.getHeader(HEADER_NAME_X_FORWARDED_PROTOCOL);
   }
 
   public static boolean isSecure(final HttpServletRequest request)
   {
-    return request.isSecure() || CommonWebConstants.HTTPS.equals(ServletUtilForNginx.getProtocol(request));
+    return request.isSecure() || CommonWebConstants.HTTPS.equals(ServletUtilForNginx.getXForwardedProtocol(request));
   }
 }
